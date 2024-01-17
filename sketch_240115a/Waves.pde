@@ -13,7 +13,7 @@ class Wave {
   }
  
   float getStrength() {
-    return this.strength * this.tick/this.wavelength;
+    return sin(this.strength * this.tick/this.wavelength);
   }
  
   void drawMe() {
@@ -25,5 +25,10 @@ class Wave {
     rect(0,0,40,5);
     text(getStrength(),20,20);
   }
+  
+  
+  
+  
+  
   
 }

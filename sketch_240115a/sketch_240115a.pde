@@ -1,3 +1,5 @@
+// import g4p
+import g4p_controls.*;
 
 
 // init boat variables
@@ -10,8 +12,8 @@ float damping = 0.98;
 void setup() {
   size(1500, 800);
   boat = new Boat(height / 2, width / 2, 50);
-  wind = new Wind(45, 1);
-  wave = new Wave(250,0,60);
+  wind = new Wind(45, 0);
+  wave = new Wave(250,0,120);
 }
 
 
