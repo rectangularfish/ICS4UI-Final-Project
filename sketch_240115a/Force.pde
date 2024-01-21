@@ -1,30 +1,46 @@
-class Force() {
+class Force {
   
  float angle;
  
  float strength;
- 
+
  PVector offset; 
  
- 
+ color colour;
   
   
- Force(float a,  float s) {
+ Force(float a,  float s, PVector o, color c) {
    
    
    this.angle = a;
    
    this.strength = s;
    
+   this.offset = o;
+   
+   this.colour = c;
+   
    
    
  }
   
   void drawMe() {
-    translate(150,50);
+    translate(this.offset.x, this.offset.y);
     rotate(radians(this.angle));
-    fill(255,255,255);
+    fill(this.colour);
     rect(0,0,40,5);
+    
+    
+    
+  }
+  
+  
+  
+  void changeStrength(int s) {
+    
+    this.strength = s;
+ 
+    
   }
   
   

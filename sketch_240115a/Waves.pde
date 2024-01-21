@@ -1,29 +1,32 @@
-class Wave {
-  float angle;
-  float strength;
+class Wave extends Force {
+ 
   float wavelength;
   
   float tick;
   
-  Wave(float angle, float strength, float wavelength) {
-    this.angle = angle;
-    this.strength = strength;
-    this.wavelength = wavelength;
+  Wave(float a, float s, PVector o, color c, float wl) {
+    
+    // calls force constructor
+    super(a, s, o, c); 
+    
+    this.wavelength = wl;
     this.tick = 0;
+    
+  
   }
  
   float getStrength() {
-    return sin(this.strength * this.tick/this.wavelength);
+    
+    this.tick = (this.tick+1) % this.wavelength;
+    return this.strength * this.tick/this.wavelength;
   }
  
   void drawMe() {
-    this.tick = (this.tick+1) % this.wavelength;
     
-    translate(50,50);
-    rotate(radians(this.angle));
-    fill(0,255,255);
-    rect(0,0,40,5);
-    text(getStrength(),20,20);
+   super.drawMe();
+   text(getStrength(),20,20);
+
+    
   }
   
   
