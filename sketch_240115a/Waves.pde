@@ -4,10 +4,10 @@ class Wave extends Force {
   float tick;
   float attack;
 
-  Wave(float a, float s, float attack, PVector o, color c, float wavelength) {
+  Wave(float s, float attack, PVector o, color c, float wavelength) {
 
     // calls force constructor
-    super(a, s, o, c);
+    super(180, s, o, c);
 
     this.wavelength = wavelength;
     this.tick = 0;
@@ -16,18 +16,24 @@ class Wave extends Force {
     this.attack = attack;
   }
 
+
   float getStrength(int x, int y) {
     float l = this.wavelength;
     float t = this.attack;
     float s = this.strength;
 
-    x+=this.tick;
 
-    //float off = sin(radians(this.angle))*sqrt(x*x+y*y);
-    //float str = (sin(2*PI*off/l - t * cos(2*PI*off/l)) + 1 )*s;
-    float str = (sin(2*PI*x/l - t * cos(2*PI*x/l)) + 1 )*s;
+    if(this.strength > 0) {
+      x+=this.tick;
+      y+=this.tick;
+    } else {
+      x-=this.tick;
+      y-=this.tick;
+    }
+    
+    float str = (sin(2*PI*x/l - t * sin(2*PI*x/l)) + 1 )*s;
 
-    //println("angle: "+this.angle+" x: "+x+" y: "+y+" off: "+off+" str: "+str);
+    //println("angle: "+this.angle+" x: "+x+" y: "+y+" str: "+str);
 
     return str;
   }
@@ -64,7 +70,7 @@ class Wave extends Force {
         stroke(str*100, str*100, 50);
         //fill(str*50, str*50, 50);
         //point(i, j);
-        rect(i,j,2,2);
+        rect(i, j, 2, 2);
       }
     }
 

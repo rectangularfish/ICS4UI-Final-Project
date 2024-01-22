@@ -16,8 +16,8 @@ void setup() {
   //   Boat(int x, int y, int horsePower, int weight, String type) {
 
   boat = new Boat(width/2, height/2, 30, 10, 200, 2000, "Cruisers" );
-  wind = new Force(45, 1, new PVector(150, 50), color(255, 255, 255));
-  wave = new Wave(53, 30, 1.3, new PVector(50, 50), color(0, 255, 255), 420);
+  wind = new Force(45, 0, new PVector(150, 50), color(255, 255, 255));
+  wave = new Wave(-12, -1.4, new PVector(50, 50), color(0, 255, 255), 200);
 
   createGUI();
 }
@@ -45,7 +45,7 @@ void draw() {
   boat.coords.y += sin(radians(wind.angle))*wind.strength;
 
   // add wave
-  boat.coords.x -= cos(radians(wave.angle))*wave.getStrength(int(oldX),int(oldY))/20; //(boat.weight/1000);
+  boat.coords.x += cos(radians(wave.angle))*wave.getStrength(int(oldX),int(oldY))/20; //(boat.weight/1000);
   //boat.coords.y -= sin(radians(wave.angle))*wave.getStrength(int(oldX),int(oldY))/10;
 
   // compute SOG
@@ -66,7 +66,6 @@ void draw() {
   wave.drawMe();
   boat.drawMe();
   wind.drawMe();
-  //wave.drawMe();
 
 
 
