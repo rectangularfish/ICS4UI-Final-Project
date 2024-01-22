@@ -4,6 +4,9 @@ class Boat {
   PVector coords;
   float maxSpeed;
 
+  int boatLen;
+  int boatWidth;
+
   float speedX, speedY;
   float engine_power;
   float angle;
@@ -13,73 +16,45 @@ class Boat {
 
 
   String type;
-
   int boatSpeed;
 
+  float SOG=0;
 
-
-
-
-  Boat(int x, int y, int horsePower, int weight, String type) {
-
+  Boat(int x, int y, int boatLen, int boatWidth, int horsePower, int weight, String type) {
     this.coords = new PVector(x, y);
 
     this.speedX = 0;
     this.speedY = 0;
-
-    this.maxSpeed = sqrt(float(horsePower) / weight);
-
-    this.boatSpeed = 0;
-
-
-    println((horsePower * 1.0) / weight);
-    println("Horsepower:", horsePower, "Weight:", weight);
-
-    int crouchConstant = 0;
-
-   
-
-
-    println(crouchConstant);
-
-    this.maxSpeed *= crouchConstant;
-
-    println(maxSpeed);
-
-
-
-
+    this.maxSpeed = (((sqrt(float(horsePower) / weight) * determineCrouchconstant(type)) * 1.609) * 2) / 100;
     this.angle = 0;
+    this.boatLen = boatLen;
+    this.boatWidth = boatWidth;
+    println(maxSpeed);
   }
 
   float boatSpeed() {
-    
-    return min((maxSpeed * 2) / 100, sqrt( this.speedX*this.speedX + this.speedY*this.speedY )) ;
+    //println(sqrt(( this.speedX*this.speedX + this.speedY*this.speedY ) / 2) * 100);
+    return min(this.maxSpeed, sqrt( this.speedX*this.speedX + this.speedY*this.speedY ));
   }
 
   void changeEnginePower(float x) {
     this.engine_power += x;
-    this.engine_power = max(this.engine_power, -0.1);
   }
 
   void drawMe() {
-
-
-
     fill(255, 255, 255);
     translate(this.coords.x, this.coords.y);
     text(engine_power, -30-25, -20-13);
     text(angle+"°", +30-25, -20-13);
-    text((this.boatSpeed() / 2) * 100, 5, 33  );
-    
+    text("km/h: "+(this.boatSpeed() / 2) * 10, 5, 33 );
+    text("SOG: "+this.SOG, 5, 50 );
 
     rotate(radians(this.angle));
-    rect(-25, -13, 50, 26);
+    rect(-this.boatLen/2, -this.boatWidth/2, this.boatLen, this.boatWidth);
     fill(0, 0, 100);
-    rect(10, -13, 15, 26);
+    int cockpit = 5;
+    rect(this.boatLen-cockpit, this.boatWidth-cockpit, cockpit, cockpit);
+
     resetMatrix();
-
-
-    //rotate(0);
   }
 }

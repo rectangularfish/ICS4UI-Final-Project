@@ -5,13 +5,12 @@ void keyPressed() {
   }
 
   if (keyCode == UP) {
-    boat.changeEnginePower(0.01);
+    boat.changeEnginePower(0.005);
   }
 
   if (keyCode == DOWN) {
-
     if (boat.engine_power > 0) {
-      boat.changeEnginePower(-0.01);
+      boat.changeEnginePower(-0.005);
     }
   }
 

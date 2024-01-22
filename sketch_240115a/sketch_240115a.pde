@@ -9,33 +9,68 @@ Wave wave;
 float damping = 0.98;
 
 
+
 void setup() {
   size(1500, 800);
-  boat = new Boat(height / 2, width / 2, 200, 2000, "Cruisers" );
-  wind = new Force(45, 1, new PVector(150, 50), color(255,255,255));
-  wave = new Wave(250,0, new PVector(50, 50), color(0,255,255), 120);
-  
-  
-  
+
+  //   Boat(int x, int y, int horsePower, int weight, String type) {
+
+  boat = new Boat(width/2, height/2, 30, 10, 200, 2000, "Cruisers" );
+  wind = new Force(45, 1, new PVector(150, 50), color(255, 255, 255));
+  wave = new Wave(53, 30, 1.3, new PVector(50, 50), color(0, 255, 255), 420);
+
+  createGUI();
 }
 
 
 void draw() {
 
+  float oldX = boat.coords.x;
+  float oldY = boat.coords.y;
+
+  // compute new coordinates
   boat.speedX = boat.speedX + cos(radians(boat.angle))*boat.engine_power ;
   boat.speedY = boat.speedY + sin(radians(boat.angle))*boat.engine_power ;
 
+  // add boat inertia
+  boat.coords.x += boat.speedX;
+  boat.coords.y += boat.speedY;
+
+  // add boat steering
+  boat.coords.x += cos(radians(boat.angle))*boat.boatSpeed()*4;
+  boat.coords.y += sin(radians(boat.angle))*boat.boatSpeed()*4;
+
+  // add wind
+  boat.coords.x += cos(radians(wind.angle))*wind.strength;
+  boat.coords.y += sin(radians(wind.angle))*wind.strength;
+
+  // add wave
+  boat.coords.x -= cos(radians(wave.angle))*wave.getStrength(int(oldX),int(oldY))/20; //(boat.weight/1000);
+  //boat.coords.y -= sin(radians(wave.angle))*wave.getStrength(int(oldX),int(oldY))/10;
+
+  // compute SOG
+  float sogx = abs(boat.coords.x - oldX);
+  float sogy = abs(boat.coords.y - oldY);
+  boat.SOG = sqrt(sogx*sogx + sogy*sogy);
+
+  // wrap around
+  boat.coords.x = boat.coords.x % width;
+  boat.coords.y = boat.coords.y % height;
+
+  if ( boat.coords.y < 0 ) boat.coords.y = height - boat.coords.y;
+  if ( boat.coords.x < 0 ) boat.coords.x = width - boat.coords.x;
 
 
-  boat.coords.x += boat.speedX + cos(radians(boat.angle))*boat.boatSpeed()*4 + cos(radians(wind.angle))*wind.strength + cos(radians(wave.angle))*wave.getStrength();;
-  boat.coords.y += boat.speedY + sin(radians(boat.angle))*boat.boatSpeed()*4 + sin(radians(wind.angle))*wind.strength + sin(radians(wave.angle))*wave.getStrength();;  
-  
-  
   background(0, 0, 255);
+
+  wave.drawMe();
   boat.drawMe();
   wind.drawMe();
-  wave.drawMe();
-  
+  //wave.drawMe();
+
+
+
+
   boat.speedX *= damping;
   boat.speedY *= damping;
 }
