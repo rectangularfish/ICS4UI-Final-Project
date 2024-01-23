@@ -18,7 +18,6 @@ class Force {
       
  }
  
- 
   
   void drawMe() {
     translate(this.offset.x, this.offset.y);

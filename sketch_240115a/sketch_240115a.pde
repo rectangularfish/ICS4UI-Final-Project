@@ -17,7 +17,7 @@ void setup() {
 
   boat = new Boat(width/2, height/2, 30, 10, 200, 2000, "Cruisers" );
   wind = new Force(45, 0, new PVector(150, 50), color(255, 255, 255));
-  wave = new Wave(-12, -1.4, new PVector(50, 50), color(0, 255, 255), 200);
+  wave = new Wave(3, 5, new PVector(50, 50), color(0, 255, 255), 450);
 
   createGUI();
 }
