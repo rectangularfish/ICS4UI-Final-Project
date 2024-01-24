@@ -4,7 +4,7 @@ class Wave extends Force {
   float tick;
   float attack;
 
-  Wave(float s, float attack, PVector o, color c, float wavelength) {
+  Wave(float s, float attack, float wavelength, PVector o, color c) {
 
     // calls force constructor
     super(180, s, o, c);
@@ -30,7 +30,6 @@ class Wave extends Force {
       x-=this.tick;
       y-=this.tick;
     }
-    
     float str = (sin(2*PI*x/l - t * sin(2*PI*x/l)) + 1 )*s;
 
     //println("angle: "+this.angle+" x: "+x+" y: "+y+" str: "+str);
@@ -38,19 +37,7 @@ class Wave extends Force {
     return str;
   }
 
-  //float getStrength() {
-  //  // return this.strength * this.tick/this.wavelength;
-
-  //  float x = this.tick;
-  //  float l = this.wavelength;
-  //  float t = this.attack;
-  //  float s = this.strength;
-
-  //  float str = (sin(2*PI*x/l - t * cos(2*PI*x/l)) + 1 )*s;
-
-  //  //println("tick: "+tick+" str: "+str);
-  //  return str;
-  //}
+  
 
   void drawMe() {
     super.drawMe();
@@ -58,8 +45,6 @@ class Wave extends Force {
 
     //text(getStrength(), 20, 20);
     resetMatrix();
-    //    for (int i =  int(boat.coords.x) -200; i < int(boat.coords.x) + 200; i += 5 ) {
-    //      for (int j = int(boat.coords.y)-200 ; j < int(boat.coords.y) + 200; j += 5 ) {
 
     for (int i =  0; i < width; i += 10 ) {
       for (int j = 0; j < height; j += 10 ) {

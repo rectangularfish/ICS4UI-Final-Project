@@ -1,14 +1,17 @@
 int determineCrouchconstant(String type) {
  
-   if (type.equals("Cruisers") || type.equals("Average runabouts") || type.equals("Passenger vessels")) {
+   if (type.equals("Cruiser") || type.equals("Average runabout") || type.equals("Passenger vessel")) {
       return 150;
-    } else if (type.equals("Light high-speed cruisers") || type.equals( "High-speed runabouts")) {
+    } else if (type.equals("Light high-speed cruiser") || type.equals( "High-speed runabout")) {
       return 190;
-    } else if (type.equals("Racing boats")) {
+    } else if (type.equals("Racing boat")) {
       return 210;
-    } else if (type.equals("Hydroplanes")) {
+    } else if (type.equals("Hydroplane")) {
       return 220;
     } 
+    else if (type.equals("Sea sled")) {
+      return 230;
+    }
     
     return 0;
   

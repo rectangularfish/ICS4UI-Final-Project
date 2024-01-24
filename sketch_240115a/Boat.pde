@@ -13,6 +13,8 @@ class Boat {
 
   float horsePower;
   float weight;
+  
+  
 
 
   String type;
@@ -29,7 +31,7 @@ class Boat {
     this.angle = 0;
     this.boatLen = boatLen;
     this.boatWidth = boatWidth;
-    println(maxSpeed);
+    this.weight = weight;
   }
 
   float boatSpeed() {
@@ -44,16 +46,17 @@ class Boat {
   void drawMe() {
     fill(255, 255, 255);
     translate(this.coords.x, this.coords.y);
-    text(engine_power, -30-25, -20-13);
-    text(angle+"°", +30-25, -20-13);
-    text("km/h: "+(this.boatSpeed() / 2) * 10, 5, 33 );
-    text("SOG: "+this.SOG, 5, 50 );
+    text(nf(engine_power * 100, 0, 1), -30-25, -20-13);
+    text(nf(abs(angle%360), 0, 1)+"°", 30, -20-13);
+    
+    text("km/h: "+nf((this.boatSpeed() / 2) * 100, 0, 2), 5, 33 );
+    text("SOG: "+nf(this.SOG * 10, 0, 2), 5, 50 );
 
     rotate(radians(this.angle));
-    rect(-this.boatLen/2, -this.boatWidth/2, this.boatLen, this.boatWidth);
+    rect(-15, -7.5, 30, 15);
     fill(0, 0, 100);
-    int cockpit = 5;
-    rect(this.boatLen-cockpit, this.boatWidth-cockpit, cockpit, cockpit);
+    int cockpit = 18;
+    rect(this.boatLen-cockpit, this.boatWidth-cockpit, cockpit-4, cockpit-4);
 
     resetMatrix();
   }
