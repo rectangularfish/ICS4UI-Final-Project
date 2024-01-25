@@ -72,6 +72,8 @@ void draw() {
 
   background(0, 0, 255);
 
+
+  // wave
   wave.drawMe();
   boat.drawMe();
   wind.drawMe();
