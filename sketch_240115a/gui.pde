@@ -19,20 +19,48 @@ synchronized public void win_draw1(PApplet appc, GWinData data) { //_CODE_:windo
 } //_CODE_:window1:787770:
 
 public void boatWeightChanged(GTextField source, GEvent event) { //_CODE_:boatWeightField:942429:
-  println("boatWeightField - GTextField >> GEvent." + event + " @ " + millis());
+
+  if (event == GEvent.ENTERED) {
+
+    boat.weight = int(source.getText());
+  }
+  boat.calculateMaxSpeed();
 } //_CODE_:boatWeightField:942429:
 
-public void textfield1_change1(GTextField source, GEvent event) { //_CODE_:textfield1:321998:
-  println("textfield1 - GTextField >> GEvent." + event + " @ " + millis());
+public void motorPowerChanged(GTextField source, GEvent event) { //_CODE_:textfield1:321998:
+
+  if (event == GEvent.ENTERED) {
+
+    boat.weight = int(source.getText());
+  }
+
+  boat.calculateMaxSpeed();
 } //_CODE_:textfield1:321998:
 
-public void dropList1_click1(GDropList source, GEvent event) { //_CODE_:dropList1:421174:
-  println("dropList1 - GDropList >> GEvent." + event + " @ " + millis());
+public void boatTypeClick(GDropList source, GEvent event) { //_CODE_:dropList1:421174:
+
+  boat.type = source.getSelectedText();
+
+  boat.calculateMaxSpeed();
 } //_CODE_:dropList1:421174:
 
-public void slider1_change1(GSlider source, GEvent event) { //_CODE_:slider1:812044:
-  println("slider1 - GSlider >> GEvent." + event + " @ " + millis());
+public void strengthChange(GSlider source, GEvent event) { //_CODE_:slider1:812044:
+
+  wave.strength = source.getValueI();
 } //_CODE_:slider1:812044:
+
+public void attackChange(GSlider source, GEvent event) { //_CODE_:slider2:227914:
+
+
+    wave.attack = source.getValueI();
+
+} //_CODE_:slider2:227914:
+
+public void wavelengthChange(GSlider source, GEvent event) { //_CODE_:slider3:686099:
+
+    wave.wavelength = source.getValueI();
+
+} //_CODE_:slider3:686099:
 
 
 
@@ -43,7 +71,7 @@ public void createGUI(){
   G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
   G4P.setMouseOverEnabled(false);
   surface.setTitle("Sketch Window");
-  window1 = GWindow.getWindow(this, "Window title", 0, 0, 800, 400, JAVA2D);
+  window1 = GWindow.getWindow(this, "Window title", 0, 0, 600, 400, JAVA2D);
   window1.noLoop();
   window1.setActionOnClose(G4P.KEEP_OPEN);
   window1.addDrawHandler(this, "win_draw1");
@@ -52,6 +80,7 @@ public void createGUI(){
   label1.setText("Boat Weight: (lbs)");
   label1.setOpaque(false);
   boatWeightField = new GTextField(window1, 110, 90, 80, 30, G4P.SCROLLBARS_NONE);
+  boatWeightField.setText("800");
   boatWeightField.setLocalColorScheme(GCScheme.CYAN_SCHEME);
   boatWeightField.setOpaque(true);
   boatWeightField.addEventHandler(this, "boatWeightChanged");
@@ -60,9 +89,10 @@ public void createGUI(){
   label2.setText("Motor Power: (hP)");
   label2.setOpaque(false);
   textfield1 = new GTextField(window1, 110, 140, 80, 30, G4P.SCROLLBARS_NONE);
+  textfield1.setText("200");
   textfield1.setLocalColorScheme(GCScheme.CYAN_SCHEME);
   textfield1.setOpaque(true);
-  textfield1.addEventHandler(this, "textfield1_change1");
+  textfield1.addEventHandler(this, "motorPowerChanged");
   label3 = new GLabel(window1, 60, 10, 90, 30);
   label3.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label3.setText("Boat Stats");
@@ -74,12 +104,12 @@ public void createGUI(){
   dropList1 = new GDropList(window1, 110, 50, 160, 180, 5, 10);
   dropList1.setItems(loadStrings("list_421174"), 0);
   dropList1.setLocalColorScheme(GCScheme.CYAN_SCHEME);
-  dropList1.addEventHandler(this, "dropList1_click1");
+  dropList1.addEventHandler(this, "boatTypeClick");
   label5 = new GLabel(window1, 10, 190, 100, 30);
   label5.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label5.setText("Max Speed: (km/h)");
   label5.setOpaque(false);
-  maxSpeedLabel = new GLabel(window1, 110, 190, 50, 30);
+  maxSpeedLabel = new GLabel(window1, 110, 190, 76, 30);
   maxSpeedLabel.setText("0");
   maxSpeedLabel.setOpaque(false);
   label6 = new GLabel(window1, 350, 10, 90, 30);
@@ -90,12 +120,32 @@ public void createGUI(){
   label7.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label7.setText("Strength:");
   label7.setOpaque(false);
-  slider1 = new GSlider(window1, 390, 40, 140, 50, 10.0);
+  slider1 = new GSlider(window1, 390, 50, 140, 50, 10.0);
   slider1.setShowValue(true);
   slider1.setLimits(25, 0, 100);
   slider1.setNumberFormat(G4P.INTEGER, 0);
   slider1.setOpaque(false);
-  slider1.addEventHandler(this, "slider1_change1");
+  slider1.addEventHandler(this, "strengthChange");
+  label8 = new GLabel(window1, 300, 100, 90, 40);
+  label8.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  label8.setText("Attack");
+  label8.setOpaque(false);
+  slider2 = new GSlider(window1, 390, 100, 140, 40, 10.0);
+  slider2.setShowValue(true);
+  slider2.setLimits(3.0, -7.0, 7.0);
+  slider2.setNumberFormat(G4P.DECIMAL, 2);
+  slider2.setOpaque(false);
+  slider2.addEventHandler(this, "attackChange");
+  label9 = new GLabel(window1, 300, 150, 90, 40);
+  label9.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  label9.setText("Wavelength:");
+  label9.setOpaque(false);
+  slider3 = new GSlider(window1, 390, 150, 140, 40, 10.0);
+  slider3.setShowValue(true);
+  slider3.setLimits(300, 200, 1000);
+  slider3.setNumberFormat(G4P.INTEGER, 0);
+  slider3.setOpaque(false);
+  slider3.addEventHandler(this, "wavelengthChange");
   window1.loop();
 }
 
@@ -114,3 +164,7 @@ GLabel maxSpeedLabel;
 GLabel label6; 
 GLabel label7; 
 GSlider slider1; 
+GLabel label8; 
+GSlider slider2; 
+GLabel label9; 
+GSlider slider3; 

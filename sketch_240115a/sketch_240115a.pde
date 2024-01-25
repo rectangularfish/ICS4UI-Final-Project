@@ -13,18 +13,27 @@ float damping = 0.98;
 void setup() {
   size(1500, 800);
 
-  //   Boat(int x, int y, int horsePower, int weight, String type) {
+  //Boat(int x, int y, int boatLen, int boatWidth, int horsePower, int weight, String type) {
 
   boat = new Boat(width/2, height/2, 30, 10, 200, 800, "Cruiser" );
+  
+  boat.calculateMaxSpeed();
+  
+  
+  
+  
   wind = new Force(45, 0, new PVector(150, 50), color(255, 255, 255));
-  wave = new Wave(40, 5, 500, new PVector(50, 50), color(0, 255, 255));
+  wave = new Wave(25, 3, 300, new PVector(50, 50), color(0, 255, 255));
 
   createGUI();
 }
 
 
 void draw() {
+    println(boat.maxSpeed);
+    maxSpeedLabel.setText(str(boat.maxSpeed) + " km/h");
 
+  
   float oldX = boat.coords.x;
   float oldY = boat.coords.y;
 

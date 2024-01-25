@@ -13,8 +13,8 @@ class Boat {
 
   float horsePower;
   float weight;
-  
-  
+
+
 
 
   String type;
@@ -27,17 +27,29 @@ class Boat {
 
     this.speedX = 0;
     this.speedY = 0;
-    this.maxSpeed = (((sqrt(float(horsePower) / weight) * determineCrouchconstant(type)) * 1.609) * 2) / 100;
+
+    this.horsePower = horsePower;
+    this.weight = weight;
+    this.type = type;
+
     this.angle = 0;
     this.boatLen = boatLen;
     this.boatWidth = boatWidth;
-    this.weight = weight;
+
+   
   }
 
   float boatSpeed() {
     //println(sqrt(( this.speedX*this.speedX + this.speedY*this.speedY ) / 2) * 100);
     return min(this.maxSpeed, sqrt( this.speedX*this.speedX + this.speedY*this.speedY ));
   }
+
+
+  void calculateMaxSpeed() {
+    this.maxSpeed = float(nf((sqrt(this.horsePower / this.weight) * determineCrouchconstant(this.type) * 1.603), 0, 2));
+  }
+
+
 
   void changeEnginePower(float x) {
     this.engine_power += x;
@@ -48,7 +60,7 @@ class Boat {
     translate(this.coords.x, this.coords.y);
     text(nf(engine_power * 100, 0, 1), -30-25, -20-13);
     text(nf(abs(angle%360), 0, 1)+"°", 30, -20-13);
-    
+
     text("km/h: "+nf((this.boatSpeed() / 2) * 100, 0, 2), 5, 33 );
     text("SOG: "+nf(this.SOG * 10, 0, 2), 5, 50 );
 
