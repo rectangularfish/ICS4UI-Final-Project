@@ -23,9 +23,10 @@ public void boatWeightChanged(GTextField source, GEvent event) { //_CODE_:boatWe
   if (event == GEvent.ENTERED) {
 
     boat.weight = int(source.getText());
+    wind.changeStrength(wind.strength/(boat.weight / 50));
   }
   boat.calculateMaxSpeed();
-  wind.changeStrength(wind.strength/(boat.weight / 100));
+  
 } //_CODE_:boatWeightField:942429:
 
 public void motorPowerChanged(GTextField source, GEvent event) { //_CODE_:textfield1:321998:

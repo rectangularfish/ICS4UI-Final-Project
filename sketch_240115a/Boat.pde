@@ -63,7 +63,7 @@ class Boat {
 
     text("km/h: "+nf((this.boatSpeed() / 2) * 100, 0, 2), 5, 33 );
     text("SOG: "+nf(this.SOG * 10, 0, 2), 5, 50 );
-    println("Speed:" + nf((this.boatSpeed() / 2) * 100) + " Speed over ground: " + this.SOG * 10);
+    //println("Speed:" + nf((this.boatSpeed() / 2) * 100) + " Speed over ground: " + this.SOG * 10);
     rotate(radians(this.angle));
     rect(-15, -7.5, 30, 15);
     fill(0, 0, 100);

@@ -19,12 +19,9 @@ void setup() {
 
   boat.calculateMaxSpeed();
 
-
-
-
   wind = new Force(45, 100, new PVector(150, 50), color(255, 255, 255));
   wave = new Wave(25, 3, 300, new PVector(50, 50), color(0, 255, 255));
-  wind.changeStrength(wind.strength/(boat.weight / 100));
+  wind.changeStrength(wind.strength/(boat.weight / 50));
 
   createGUI();
 }
@@ -33,7 +30,6 @@ void setup() {
 void draw() {
   maxSpeedLabel.setText(str(boat.maxSpeed) + " km/h");
 
-  println(boat.weight);
 
   float oldX = boat.coords.x;
   float oldY = boat.coords.y;

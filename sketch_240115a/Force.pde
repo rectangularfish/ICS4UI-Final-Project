@@ -29,7 +29,11 @@ class Force {
   
   void changeStrength(float s) {
     
+    
+    println("changing strength");
     this.strength = s;
+    
+    println(this.strength);
    
   }
   
