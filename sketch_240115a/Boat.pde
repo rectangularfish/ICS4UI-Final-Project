@@ -41,7 +41,7 @@ class Boat {
 
   float boatSpeed() {
     //println(sqrt(( this.speedX*this.speedX + this.speedY*this.speedY ) / 2) * 100);
-    return min(this.maxSpeed, sqrt( this.speedX*this.speedX + this.speedY*this.speedY ));
+    return min((this.maxSpeed * 2) / 100, sqrt( this.speedX*this.speedX + this.speedY*this.speedY ));
   }
 
 
@@ -63,7 +63,7 @@ class Boat {
 
     text("km/h: "+nf((this.boatSpeed() / 2) * 100, 0, 2), 5, 33 );
     text("SOG: "+nf(this.SOG * 10, 0, 2), 5, 50 );
-
+    println("Speed:" + nf((this.boatSpeed() / 2) * 100) + " Speed over ground: " + this.SOG * 10);
     rotate(radians(this.angle));
     rect(-15, -7.5, 30, 15);
     fill(0, 0, 100);

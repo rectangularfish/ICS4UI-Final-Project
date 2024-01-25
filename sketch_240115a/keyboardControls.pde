@@ -4,7 +4,8 @@ void keyPressed() {
     boat.engine_power =0;
   }
 
-  if (keyCode == UP) {
+  if (keyCode == UP && boat.boatSpeed() < (boat.maxSpeed * 2) / 100) {
+    
     boat.changeEnginePower(0.005);
   }
 
