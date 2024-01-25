@@ -19,9 +19,9 @@ void setup() {
 
   boat.calculateMaxSpeed();
 
-  wind = new Force(45, 100, new PVector(150, 50), color(255, 255, 255));
+  wind = new Force(45, 4, new PVector(150, 50), color(255, 255, 255));
   wave = new Wave(25, 3, 300, new PVector(50, 50), color(0, 255, 255));
-  wind.changeStrength(wind.strength/(boat.weight / 50));
+  wind.changeStrength();
 
   createGUI();
 }
@@ -51,7 +51,7 @@ void draw() {
   boat.coords.y += sin(radians(wind.angle))*wind.strength;
 
   // add wave
-  boat.coords.x += cos(radians(wave.angle))*wave.getStrength(int(oldX), int(oldY))/20 /(boat.weight/100);
+  boat.coords.x += cos(radians(wave.angle))*wave.getStrength(int(oldX), int(oldY)) / 20 / (boat.weight/50);
 
   // compute SOG
   float sogx = abs(boat.coords.x - oldX);
