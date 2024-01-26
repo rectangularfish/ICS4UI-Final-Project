@@ -1,43 +1,25 @@
 class Boat {
 
-  // set class variables
+  // set class fields
   PVector coords;
-  float maxSpeed;
 
-  int boatLen;
-  int boatWidth;
-
-  float speedX, speedY;
-  float engine_power;
-  float angle;
-
-  float horsePower;
-  float weight;
-
-
-
-
+  float speedX, speedY, engine_power, angle, horsePower, weight, SOG, maxSpeed;
   String type;
-  int boatSpeed;
 
-  float SOG=0;
 
-  Boat(int x, int y, int horsePower, int weight, String type) {
+  Boat(int x, int y, int hP, int w, String t) {
+    
     this.coords = new PVector(x, y);
-
     this.speedX = 0;
     this.speedY = 0;
-
-    this.horsePower = horsePower;
-    this.weight = weight;
-    this.type = type;
-
+    this.horsePower = hP;
+    this.weight = w;
+    this.type = t;
     this.angle = 0;
- 
+    this.SOG = 0;
   }
 
   float boatSpeed() {
-    //println(sqrt(( this.speedX*this.speedX + this.speedY*this.speedY ) / 2) * 100);
     return min((this.maxSpeed * 2) / 100, sqrt( this.speedX*this.speedX + this.speedY*this.speedY ));
   }
 
@@ -71,7 +53,6 @@ class Boat {
 
     fill(0);
     ellipse(-25, 0.5, 25, 10);
-
 
     resetMatrix();
   }

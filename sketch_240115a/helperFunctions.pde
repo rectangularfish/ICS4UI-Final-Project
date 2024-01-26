@@ -25,22 +25,26 @@ int findIndex(String target, String[] array) {
 }
 
 
-String[] loadSettings() {
-
-  String [] lines = loadStrings("settings.txt");
-
-  return lines;
-}
 
 
 void setValues() {
-  boatPowerField.setText(data[0]);
-  boatWeightField.setText(data[1]);
-  boatDropList.setSelected(p1);
+
+
+  String[] dropList = loadStrings("list_421174");
+
+  String [] data = loadStrings("settings.txt");
+
+
+
+  maxSpeedLabel.setText(str(boat.maxSpeed) + " km/h");
+
+  boatPowerField.setText(str(int(data[0])));
+  boatWeightField.setText(str(int(data[1])));
+  boatDropList.setSelected(findIndex(data[2], dropList));
   windAngleSlider.setValue(int(data[3]));
 
   windStrengthSlider.setValue(int(data[4]));
   waveStrengthSlider.setValue(int(data[5]));
-  waveStrengthSlider.setValue(int(data[6]));
+  waveAttackSlider.setValue(int(data[6]));
   wavelengthSlider.setValue(int(data[7]));
 }

@@ -26,7 +26,7 @@ public void boatWeightChanged(GTextField source, GEvent event) { //_CODE_:boatWe
     wind.changeStrength();
   }
   boat.calculateMaxSpeed();
-  
+  maxSpeedLabel.setText(str(boat.maxSpeed) + " km/h");
 } //_CODE_:boatWeightField:942429:
 
 public void motorPowerChanged(GTextField source, GEvent event) { //_CODE_:boatPowerField:321998:
@@ -37,6 +37,7 @@ public void motorPowerChanged(GTextField source, GEvent event) { //_CODE_:boatPo
   }
 
   boat.calculateMaxSpeed();
+  maxSpeedLabel.setText(str(boat.maxSpeed) + " km/h");
 } //_CODE_:boatPowerField:321998:
 
 public void boatTypeClick(GDropList source, GEvent event) { //_CODE_:boatDropList:421174:
@@ -44,6 +45,7 @@ public void boatTypeClick(GDropList source, GEvent event) { //_CODE_:boatDropLis
   boat.type = source.getSelectedText();
 
   boat.calculateMaxSpeed();
+  maxSpeedLabel.setText(str(boat.maxSpeed) + " km/h");
 } //_CODE_:boatDropList:421174:
 
 public void strengthChange(GSlider source, GEvent event) { //_CODE_:waveStrengthSlider:812044:
@@ -65,18 +67,13 @@ public void wavelengthChange(GSlider source, GEvent event) { //_CODE_:wavelength
 public void strengthWindChange(GSlider source, GEvent event) { //_CODE_:windStrengthSlider:986443:
 
   wind.constantStrength = source.getValueI();
-  
+
   wind.changeStrength();
-
-
 } //_CODE_:windStrengthSlider:986443:
 
 public void angleChange(GSlider source, GEvent event) { //_CODE_:windAngleSlider:273369:
 
-    wind.angle = source.getValueI();
-    
-    
-
+  wind.angle = source.getValueI();
 } //_CODE_:windAngleSlider:273369:
 
 public void button1_click1(GButton source, GEvent event) { //_CODE_:button1:598995:
@@ -84,21 +81,20 @@ public void button1_click1(GButton source, GEvent event) { //_CODE_:button1:5989
 } //_CODE_:button1:598995:
 
 public void saveButtonClicked(GButton source, GEvent event) { //_CODE_:saveSettingsButton:766507:
-    
-    String[] settings = new String[8];
-    
-    settings[0] = str(boat.horsePower);
-    settings[1] = str(boat.weight);
-    settings[2] = boat.type;
-    settings[3] = str(wind.angle);
-    settings[4] = str(wind.constantStrength);
-    settings[5] = str(wave.strength);
-    settings[6] = str(wave.attack);
-    settings[7] = str(wave.wavelength);
-    
-    
-    saveStrings("data/settings.txt", settings);
 
+  String[] settings = new String[8];
+
+  settings[0] = str(boat.horsePower);
+  settings[1] = str(boat.weight);
+  settings[2] = boat.type;
+  settings[3] = str(wind.angle);
+  settings[4] = str(wind.constantStrength);
+  settings[5] = str(wave.strength);
+  settings[6] = str(wave.attack);
+  settings[7] = str(wave.wavelength);
+
+
+  saveStrings("data/settings.txt", settings);
 } //_CODE_:saveSettingsButton:766507:
 
 
@@ -212,7 +208,7 @@ public void createGUI(){
   button1 = new GButton(window1, -700, 30, 90, 40);
   button1.setText("Save Settings");
   button1.addEventHandler(this, "button1_click1");
-  saveSettingsButton = new GButton(window1, 340, 250, 90, 40);
+  saveSettingsButton = new GButton(window1, 350, 280, 90, 40);
   saveSettingsButton.setText("Save Settings");
   saveSettingsButton.addEventHandler(this, "saveButtonClicked");
   window1.loop();
