@@ -1,55 +1,46 @@
 int determineCrouchconstant(String type) {
- 
-   if (type.equals("Cruiser") || type.equals("Average runabout") || type.equals("Passenger vessel")) {
-      return 150;
-    } else if (type.equals("Light high-speed cruiser") || type.equals( "High-speed runabout")) {
-      return 190;
-    } else if (type.equals("Racing boat")) {
-      return 210;
-    } else if (type.equals("Hydroplane")) {
-      return 220;
-    } 
-    else if (type.equals("Sea sled")) {
-      return 230;
-    }
-    
-    return 0;
-  
+
+  if (type.equals("Cruiser") || type.equals("Average runabout") || type.equals("Passenger vessel")) {
+    return 150;
+  } else if (type.equals("Light high-speed cruiser") || type.equals( "High-speed runabout")) {
+    return 190;
+  } else if (type.equals("Racing boat")) {
+    return 210;
+  } else if (type.equals("Hydroplane")) {
+    return 220;
+  } else if (type.equals("Sea sled")) {
+    return 230;
+  }
+
+  return 0;
 }
 
-//void setup() {
-  
-//  size(500, 500);
-  
-//  background(0, 0, 255);
-  
-  
-//}
+int findIndex(String target, String[] array) {
+  for (int i = 0; i < array.length; i++) {
+    if (target.equals(array[i])) {
+      return i;
+    }
+  }
+  return -1; // If not found
+}
 
 
+String[] loadSettings() {
 
-//void draw() {
-  
-//  fill(255);
-//  rect(width / 2, 250, 100, 50, 100, 10, 10, 200);
-  
-  
-//  fill(175,180,195);
-//  rect(width/2 + 40, 262, 25, 25, 5);
-  
-  
-  
-  
-  
-  
-//}
+  String [] lines = loadStrings("settings.txt");
 
-void drawArrow(int cx, int cy, int len, float angle){
-  pushMatrix();
-  translate(cx, cy);
-  rotate(radians(angle));
-  line(0,0,len, 0);
-  line(len, 0, len - 8, -8);
-  line(len, 0, len - 8, 8);
-  popMatrix();
+  return lines;
+}
+
+
+void setValues() {
+  boatPowerField.setText(data[0]);
+  boatWeightField.setText(data[1]);
+  boatDropList.setSelected(p1);
+  windAngleSlider.setValue(int(data[3]));
+
+  windStrengthSlider.setValue(int(data[4]));
+  waveStrengthSlider.setValue(int(data[5]));
+  waveStrengthSlider.setValue(int(data[6]));
+  wavelengthSlider.setValue(int(data[7]));
 }

@@ -7,20 +7,31 @@ Boat boat;
 Force wind;
 Wave wave;
 float damping = 0.98;
+boolean start = true; 
 
+String[] data;
+String[] dropList; 
+int p1;
 
 
 void setup() {
   size(1500, 800);
-
+  
+  data = loadSettings();
+  
+  dropList = loadStrings("list_421174");
+  
+  p1 = findIndex(data[2], dropList);
+ 
+  
   //Boat(int x, int y, int boatLen, int boatWidth, int horsePower, int weight, String type) {
 
-  boat = new Boat(width/2, height/2, 30, 10, 200, 800, "Cruiser" );
+  boat = new Boat(width/2, height/2, int(data[0]), int(data[1]), data[2] );
 
   boat.calculateMaxSpeed();
 
-  wind = new Force(45, 4, new PVector(150, 50), color(255, 255, 255));
-  wave = new Wave(25, 3, 300, new PVector(50, 50), color(0, 255, 255));
+  wind = new Force(int(data[3]), int(data[4]), new PVector(150, 125), color(255, 255, 255), "Wind");
+  wave = new Wave(int(data[5]), int(data[6]), int(data[7]), new PVector(150, 50), color(0, 255, 255), "Wave");
   wind.changeStrength();
 
   createGUI();
@@ -69,10 +80,10 @@ void draw() {
   background(0, 0, 255);
 
 
-  // wave
   wave.drawMe();
-  boat.drawMe();
   wind.drawMe();
+  boat.drawMe();
+
 
 
 

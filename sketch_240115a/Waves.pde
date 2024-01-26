@@ -4,10 +4,10 @@ class Wave extends Force {
   float tick;
   float attack;
 
-  Wave(float s, float attack, float wavelength, PVector o, color c) {
+  Wave(float s, float attack, float wavelength, PVector o, color c, String type) {
 
     // calls force constructor
-    super(180, s, o, c);
+    super(180, s, o, c, type);
 
     this.wavelength = wavelength;
     this.tick = 0;
@@ -32,7 +32,6 @@ class Wave extends Force {
 
 
   void drawMe() {
-    super.drawMe();
     this.tick = (this.tick+1);
 
     resetMatrix();
@@ -50,6 +49,8 @@ class Wave extends Force {
     }
 
     stroke(0, 0, 0);
+        super.drawMe();
+
     resetMatrix();
   }
 }

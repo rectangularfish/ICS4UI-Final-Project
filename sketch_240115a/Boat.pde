@@ -22,7 +22,7 @@ class Boat {
 
   float SOG=0;
 
-  Boat(int x, int y, int boatLen, int boatWidth, int horsePower, int weight, String type) {
+  Boat(int x, int y, int horsePower, int weight, String type) {
     this.coords = new PVector(x, y);
 
     this.speedX = 0;
@@ -33,10 +33,7 @@ class Boat {
     this.type = type;
 
     this.angle = 0;
-    this.boatLen = boatLen;
-    this.boatWidth = boatWidth;
-
-   
+ 
   }
 
   float boatSpeed() {
@@ -58,17 +55,23 @@ class Boat {
   void drawMe() {
     fill(255, 255, 255);
     translate(this.coords.x, this.coords.y);
-    text(nf(engine_power * 100, 0, 1), -30-25, -20-13);
-    text(nf(abs(angle%360), 0, 1)+"°", 30, -20-13);
-
-    text("km/h: "+nf((this.boatSpeed() / 2) * 100, 0, 2), 5, 33 );
-    text("SOG: "+nf(this.SOG * 10, 0, 2), 5, 50 );
-    //println("Speed:" + nf((this.boatSpeed() / 2) * 100) + " Speed over ground: " + this.SOG * 10);
+    text(nf(engine_power * 100, 0, 1), -65, -45);
+    text(nf(abs(angle%360), 0, 1)+"°", 30, -45);
+    text("Speed: "+nf((this.boatSpeed() / 2) * 100, 0, 2), 5, 63 );
+    text("SOG: "+nf(this.SOG * 10, 0, 2), 5, 93 );
     rotate(radians(this.angle));
-    rect(-15, -7.5, 30, 15);
-    fill(0, 0, 100);
-    int cockpit = 18;
-    rect(this.boatLen-cockpit, this.boatWidth-cockpit, cockpit-4, cockpit-4);
+
+    scale(0.65);
+
+    fill(255);
+    rect(-30, -14, 80, 30, 10, 100, 100, 10);
+
+    fill(175, 180, 195);
+    rect(2, -7, 15, 15, 5);
+
+    fill(0);
+    ellipse(-25, 0.5, 25, 10);
+
 
     resetMatrix();
   }
