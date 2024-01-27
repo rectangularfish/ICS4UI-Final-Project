@@ -1,24 +1,23 @@
 class Force {
-
-  float angle;
-
-  float strength;
+  
+  
+  // fields
+  float angle, strength, constantStrength;
 
   PVector offset;
 
   color colour;
 
-
-  float constantStrength;
   
   String type;
 
-  Force(float a, float s, PVector o, color c, String type) {
+
+  // constructor
+  Force(float a, float s, PVector o, color c, String t) {
 
     this.angle = a;
     this.strength = s;
-    
-    this.type = type;
+    this.type = t;
 
     this.constantStrength = s;
     this.offset = o;
@@ -30,19 +29,16 @@ class Force {
 
 
     
-    pushMatrix();
-    
+    pushMatrix();    
     strokeWeight(5);
-    translate(this.offset.x + 110 , this.offset.y);
-    
+    translate(this.offset.x + 110 , this.offset.y);    
     fill(255);
-    textSize(30);
-    
-    text(this.type + " direction:", -250, 8);
-    
-    
+    textSize(30);    
+    text(this.type + " direction:", -250, 8);    
     stroke(this.colour);
     
+    
+    // draw arrow
     rotate(radians(this.angle));
     line(0, 0, 50, 0);
     line(50, 0, 50 - 8, -8);
@@ -55,18 +51,10 @@ class Force {
 
 
 
-  //  translate(this.offset.x, this.offset.y);
-  //  rotate(radians(this.angle));
-  //  fill(this.colour);
-  //  rect(0,0,40,5);
-  //}
 
 
   void changeStrength() {
-
-    println(constantStrength);
+    
     this.strength = this.constantStrength/(boat.weight / 50);
-
-    println(this.strength);
   }
 }

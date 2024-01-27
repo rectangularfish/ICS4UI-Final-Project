@@ -1,3 +1,5 @@
+
+// returns a constant based on the type of vessel
 int determineCrouchconstant(String type) {
 
   if (type.equals("Cruiser") || type.equals("Average runabout") || type.equals("Passenger vessel")) {
@@ -15,29 +17,26 @@ int determineCrouchconstant(String type) {
   return 0;
 }
 
+// find index of a string in an array
 int findIndex(String target, String[] array) {
   for (int i = 0; i < array.length; i++) {
     if (target.equals(array[i])) {
       return i;
     }
   }
-  return -1; // If not found
+  return -1; 
 }
 
 
 
-
+// set the program gui variables to the saved one in the settings text file
 void setValues() {
-
 
   String[] dropList = loadStrings("list_421174");
 
   String [] data = loadStrings("settings.txt");
 
-
-
   maxSpeedLabel.setText(str(boat.maxSpeed) + " km/h");
-
   boatPowerField.setText(str(int(data[0])));
   boatWeightField.setText(str(int(data[1])));
   boatDropList.setSelected(findIndex(data[2], dropList));

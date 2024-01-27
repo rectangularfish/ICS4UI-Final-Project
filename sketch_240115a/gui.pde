@@ -19,29 +19,38 @@ synchronized public void win_draw1(PApplet appc, GWinData data) { //_CODE_:windo
 } //_CODE_:window1:787770:
 
 public void boatWeightChanged(GTextField source, GEvent event) { //_CODE_:boatWeightField:942429:
-
+  // change boat weight
   if (event == GEvent.ENTERED) {
 
     boat.weight = int(source.getText());
+    // change wind strength to be relative to weight
     wind.changeStrength();
   }
+
+  // calculate boat max speed since values changed
   boat.calculateMaxSpeed();
+
+  // change max speed label change
   maxSpeedLabel.setText(str(boat.maxSpeed) + " km/h");
 } //_CODE_:boatWeightField:942429:
 
 public void motorPowerChanged(GTextField source, GEvent event) { //_CODE_:boatPowerField:321998:
 
+  // change boat horse power
   if (event == GEvent.ENTERED) {
 
-    boat.weight = int(source.getText());
+    boat.horsePower = int(source.getText());
   }
 
   boat.calculateMaxSpeed();
+
+  // change max speed label
   maxSpeedLabel.setText(str(boat.maxSpeed) + " km/h");
 } //_CODE_:boatPowerField:321998:
 
 public void boatTypeClick(GDropList source, GEvent event) { //_CODE_:boatDropList:421174:
 
+  // change boat type
   boat.type = source.getSelectedText();
 
   boat.calculateMaxSpeed();
@@ -50,29 +59,37 @@ public void boatTypeClick(GDropList source, GEvent event) { //_CODE_:boatDropLis
 
 public void strengthChange(GSlider source, GEvent event) { //_CODE_:waveStrengthSlider:812044:
 
+
+  // change wave strength
   wave.strength = source.getValueI();
 } //_CODE_:waveStrengthSlider:812044:
 
 public void attackChange(GSlider source, GEvent event) { //_CODE_:waveAttackSlider:227914:
 
-
+  // change wave attack
   wave.attack = source.getValueI();
 } //_CODE_:waveAttackSlider:227914:
 
 public void wavelengthChange(GSlider source, GEvent event) { //_CODE_:wavelengthSlider:686099:
 
+
+  // change wave length
   wave.wavelength = source.getValueI();
 } //_CODE_:wavelengthSlider:686099:
 
 public void strengthWindChange(GSlider source, GEvent event) { //_CODE_:windStrengthSlider:986443:
 
+
+  // change wind strength constant
   wind.constantStrength = source.getValueI();
 
+  // recalculate the strength of the wind
   wind.changeStrength();
 } //_CODE_:windStrengthSlider:986443:
 
 public void angleChange(GSlider source, GEvent event) { //_CODE_:windAngleSlider:273369:
 
+  // change angle of the wind
   wind.angle = source.getValueI();
 } //_CODE_:windAngleSlider:273369:
 
@@ -82,8 +99,11 @@ public void button1_click1(GButton source, GEvent event) { //_CODE_:button1:5989
 
 public void saveButtonClicked(GButton source, GEvent event) { //_CODE_:saveSettingsButton:766507:
 
+
+  // create empty array for data
   String[] settings = new String[8];
 
+  // set indices with data from the program
   settings[0] = str(boat.horsePower);
   settings[1] = str(boat.weight);
   settings[2] = boat.type;
@@ -93,9 +113,14 @@ public void saveButtonClicked(GButton source, GEvent event) { //_CODE_:saveSetti
   settings[6] = str(wave.attack);
   settings[7] = str(wave.wavelength);
 
-
+  // save settings array into text file
   saveStrings("data/settings.txt", settings);
 } //_CODE_:saveSettingsButton:766507:
+
+public void loadLastSettingsPressed(GButton source, GEvent event) { //_CODE_:loadLastSettings:242421:
+  // set values to last saved in settings text file
+  setValues();
+} //_CODE_:loadLastSettings:242421:
 
 
 
@@ -106,7 +131,7 @@ public void createGUI(){
   G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
   G4P.setMouseOverEnabled(false);
   surface.setTitle("Sketch Window");
-  window1 = GWindow.getWindow(this, "Window title", 0, 0, 550, 400, JAVA2D);
+  window1 = GWindow.getWindow(this, "Window title", 0, 0, 550, 420, JAVA2D);
   window1.noLoop();
   window1.setActionOnClose(G4P.KEEP_OPEN);
   window1.addDrawHandler(this, "win_draw1");
@@ -208,9 +233,28 @@ public void createGUI(){
   button1 = new GButton(window1, -700, 30, 90, 40);
   button1.setText("Save Settings");
   button1.addEventHandler(this, "button1_click1");
-  saveSettingsButton = new GButton(window1, 350, 280, 90, 40);
+  saveSettingsButton = new GButton(window1, 310, 200, 100, 40);
   saveSettingsButton.setText("Save Settings");
   saveSettingsButton.addEventHandler(this, "saveButtonClicked");
+  label16 = new GLabel(window1, 370, 250, 80, 20);
+  label16.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  label16.setText("Controls");
+  label16.setOpaque(false);
+  label17 = new GLabel(window1, 330, 280, 160, 20);
+  label17.setText("↑: increase engine power");
+  label17.setOpaque(false);
+  label18 = new GLabel(window1, 330, 310, 160, 20);
+  label18.setText("↓: drecrease engine power");
+  label18.setOpaque(false);
+  label19 = new GLabel(window1, 330, 340, 160, 20);
+  label19.setText("←→: rotate left and right");
+  label19.setOpaque(false);
+  label20 = new GLabel(window1, 330, 370, 160, 20);
+  label20.setText("s: shut motor completely");
+  label20.setOpaque(false);
+  loadLastSettings = new GButton(window1, 420, 200, 100, 40);
+  loadLastSettings.setText("Load Last Settings");
+  loadLastSettings.addEventHandler(this, "loadLastSettingsPressed");
   window1.loop();
 }
 
@@ -240,3 +284,9 @@ GLabel label12;
 GSlider windAngleSlider; 
 GButton button1; 
 GButton saveSettingsButton; 
+GLabel label16; 
+GLabel label17; 
+GLabel label18; 
+GLabel label19; 
+GLabel label20; 
+GButton loadLastSettings; 

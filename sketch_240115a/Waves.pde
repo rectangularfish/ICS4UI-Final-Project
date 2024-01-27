@@ -1,22 +1,23 @@
 class Wave extends Force {
 
-  float wavelength;
-  float tick;
-  float attack;
+  // fields
+  float wavelength, tick, attack;
 
-  Wave(float s, float attack, float wavelength, PVector o, color c, String type) {
+  // constructor
+  Wave(float s, float a, float wl, PVector o, color c, String type) {
 
     // calls force constructor
     super(180, s, o, c, type);
 
-    this.wavelength = wavelength;
-    this.tick = 0;
 
-    // a should be between 0 and 1.5
-    this.attack = attack;
+    this.wavelength = wl;
+    this.tick = 0;
+    this.attack = a;
   }
 
 
+
+  // calculate and return the strength using an asymmetric sinusoidal function with parameters based on wavelength, attack, and the current coordinates
   float getStrength(int x, int y) {
 
     if (this.strength > 0) {
@@ -32,25 +33,24 @@ class Wave extends Force {
 
 
   void drawMe() {
-    this.tick = (this.tick+1);
+    // Increment tick
+    this.tick++;
 
-    resetMatrix();
-
-    for (int i =  0; i < width; i += 10 ) {
-      for (int j = 0; j < height; j += 10 ) {
-
-
-        float str = wave.getStrength(i, j)/wave.strength;
-
-        stroke(str*100, str*100, 50);
-
+    // Draw grid of rectangles with color based on wave strength
+    for (int i = 0; i < width; i += 10) {
+      for (int j = 0; j < height; j += 10) {
+        float str = wave.getStrength(i, j) / wave.strength;
+        stroke(str * 100, str * 100, 50);
         rect(i, j, 2, 2);
       }
     }
 
     stroke(0, 0, 0);
-        super.drawMe();
 
+    // Call superclass drawMe method
+    super.drawMe();
+
+    // Reset transformation matrix
     resetMatrix();
   }
 }
