@@ -14,11 +14,11 @@ String[] data;
 
 void setup() {
   size(1500, 800);
-   
-   
+
+
   // load data from settings text file;
   data = loadStrings("settings.txt");
-  
+
   // initilize boat
   boat = new Boat(width/2, height/2, int(data[0]), int(data[1]), data[2] );
   boat.calculateMaxSpeed();
@@ -36,40 +36,12 @@ void setup() {
 
 void draw() {
 
-  // boat old coordinates
-  float oldX = boat.coords.x;
-  float oldY = boat.coords.y;
-
-  // add boat inertia with friction slowdown
-  boat.speedX = boat.speedX - boat.speedX*boat.getFriction() + cos(radians(boat.angle))*boat.horsePower*boat.throttle*0.045;
-  boat.speedY = boat.speedY - boat.speedY*boat.getFriction() + sin(radians(boat.angle))*boat.horsePower*boat.throttle*0.045;
-  
-  // add speed to boat
-  boat.coords.x += boat.speedX/10;
-  boat.coords.y += boat.speedY/10;
-
-
-  // add wind
-  boat.coords.x += cos(radians(wind.angle))*wind.strength;
-  boat.coords.y += sin(radians(wind.angle))*wind.strength;
-
-  // add wave
-  boat.coords.x += cos(radians(wave.angle))*wave.getStrength(int(oldX), int(oldY)) / 20 / (boat.weight/50);
-
-  // compute SOG (speed over ground)
-  float sogx = abs(boat.coords.x - oldX);
-  float sogy = abs(boat.coords.y - oldY);
-  boat.SOG = sqrt(sogx*sogx + sogy*sogy);
-
-  // wrap around screen
-  boat.coords.x = boat.coords.x % width;
-  boat.coords.y = boat.coords.y % height;
-  if ( boat.coords.y < 0 ) boat.coords.y = height - boat.coords.y;
-  if ( boat.coords.x < 0 ) boat.coords.x = width - boat.coords.x;
+  // update boat position boat 
+  boat.updateBoatPosition(); 
 
 
   background(0, 0, 255);
-  
+
   // draw waves, wind and boat
   wave.drawMe();
   wind.drawMe();

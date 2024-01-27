@@ -23,7 +23,7 @@ int findIndex(String target, String[] array) {
       return i;
     }
   }
-  return -1; 
+  return -1;
 }
 
 
@@ -45,4 +45,13 @@ void setValues() {
   waveStrengthSlider.setValue(int(data[5]));
   waveAttackSlider.setValue(int(data[6]));
   wavelengthSlider.setValue(int(data[7]));
+}
+
+void boatPhysics() {
+  
+  
+  
+  
+  
+  
 }

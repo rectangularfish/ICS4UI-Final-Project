@@ -1,7 +1,3 @@
-
-int lastKeyPressTime = 0;
-int keyPressDelay = 300;
-
 void keyPressed() {
 
 
@@ -24,7 +20,6 @@ void keyPressed() {
   // decrease throttle
   if (keyCode == DOWN) {
     boat.throttle = min(1, boat.throttle-0.02);
-    ;
   }
 
   // rotate boat left

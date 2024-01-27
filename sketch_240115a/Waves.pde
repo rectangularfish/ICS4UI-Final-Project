@@ -33,7 +33,7 @@ class Wave extends Force {
 
 
   void drawMe() {
-    
+
     this.tick++;
 
     // draw grid of rectangles with colour based on wave strength
