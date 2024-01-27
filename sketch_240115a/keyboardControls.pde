@@ -5,42 +5,41 @@ int keyPressDelay = 300;
 void keyPressed() {
 
   // get the current time
-  int currentTime = millis();
+  //int currentTime = millis();
 
 
-  // increase engine power every 300 milliseconds
-  if (currentTime - lastKeyPressTime >= keyPressDelay) {
+  //// increase engine power every 300 milliseconds
+  //if (currentTime - lastKeyPressTime >= keyPressDelay) {
 
 
-    if (keyCode == UP && boat.boatSpeed() < (boat.maxSpeed * 2) / 100) {
-      boat.engine_power += 0.005;
+    if (keyCode == UP ) {
+      boat.throttle = min(1, boat.throttle+0.02);
     }
 
-
-
-
-
     // Update the last key press time
-    lastKeyPressTime = currentTime;
-  }
+  //  lastKeyPressTime = currentTime;
+  //}
 
   // if s is pressed turn off motor
   if (key == 's') {
-    boat.engine_power = 0;
+    boat.throttle = 0;
   }
+  
+  if (key == 'f') {
+    boat.throttle = 1;
+  }
+  
   if (keyCode == DOWN) {
-    if (boat.engine_power > 0) {
-      boat.engine_power -= 0.005;
-    }
+    boat.throttle = min(1, boat.throttle-0.02);;
   }
   // rotate boat left
   if (keyCode == LEFT) {
-    boat.angle -= (250 * boat.engine_power/10 ) + (250 * boat.boatSpeed()/100);
+    boat.angle -= (boat.horsePower*boat.throttle/50 ) + (boat.boatSpeed()/25);
   }
 
   // rotate boat right
   if (keyCode == RIGHT) {
-    boat.angle += (250 * boat.engine_power/10 ) + (250 * boat.boatSpeed()/100);
+    boat.angle += (boat.horsePower*boat.throttle/50 ) + (boat.boatSpeed()/25);
   }
 
 

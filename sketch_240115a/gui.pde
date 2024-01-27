@@ -131,7 +131,7 @@ public void createGUI(){
   G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
   G4P.setMouseOverEnabled(false);
   surface.setTitle("Sketch Window");
-  window1 = GWindow.getWindow(this, "Window title", 0, 0, 550, 420, JAVA2D);
+  window1 = GWindow.getWindow(this, "Window title", 0, 0, 550, 430, JAVA2D);
   window1.noLoop();
   window1.setActionOnClose(G4P.KEEP_OPEN);
   window1.addDrawHandler(this, "win_draw1");
@@ -214,7 +214,7 @@ public void createGUI(){
   label11.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label11.setText("Strength:");
   label11.setOpaque(false);
-  windStrengthSlider = new GSlider(window1, 100, 280, 140, 40, 10.0);
+  windStrengthSlider = new GSlider(window1, 100, 280, 150, 40, 10.0);
   windStrengthSlider.setShowValue(true);
   windStrengthSlider.setLimits(3, 0, 10);
   windStrengthSlider.setNumberFormat(G4P.INTEGER, 0);
@@ -224,7 +224,7 @@ public void createGUI(){
   label12.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label12.setText("Angle:");
   label12.setOpaque(false);
-  windAngleSlider = new GSlider(window1, 100, 330, 140, 40, 10.0);
+  windAngleSlider = new GSlider(window1, 100, 330, 150, 40, 10.0);
   windAngleSlider.setShowValue(true);
   windAngleSlider.setLimits(70, 0, 360);
   windAngleSlider.setNumberFormat(G4P.INTEGER, 0);
@@ -255,6 +255,9 @@ public void createGUI(){
   loadLastSettings = new GButton(window1, 420, 200, 100, 40);
   loadLastSettings.setText("Load Last Settings");
   loadLastSettings.addEventHandler(this, "loadLastSettingsPressed");
+  label13 = new GLabel(window1, 330, 400, 160, 20);
+  label13.setText("f: full throttle");
+  label13.setOpaque(false);
   window1.loop();
 }
 
@@ -290,3 +293,4 @@ GLabel label18;
 GLabel label19; 
 GLabel label20; 
 GButton loadLastSettings; 
+GLabel label13; 
