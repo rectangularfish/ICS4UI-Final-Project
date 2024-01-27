@@ -33,10 +33,10 @@ class Wave extends Force {
 
 
   void drawMe() {
-    // Increment tick
+    
     this.tick++;
 
-    // Draw grid of rectangles with color based on wave strength
+    // draw grid of rectangles with colour based on wave strength
     for (int i = 0; i < width; i += 10) {
       for (int j = 0; j < height; j += 10) {
         float str = wave.getStrength(i, j) / wave.strength;
@@ -47,10 +47,9 @@ class Wave extends Force {
 
     stroke(0, 0, 0);
 
-    // Call superclass drawMe method
+    // call superclass drawMe method
     super.drawMe();
 
-    // Reset transformation matrix
     resetMatrix();
   }
 }

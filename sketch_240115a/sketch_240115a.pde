@@ -44,16 +44,10 @@ void draw() {
   boat.speedX = boat.speedX - boat.speedX*boat.getFriction() + cos(radians(boat.angle))*boat.horsePower*boat.throttle*0.045;
   boat.speedY = boat.speedY - boat.speedY*boat.getFriction() + sin(radians(boat.angle))*boat.horsePower*boat.throttle*0.045;
   
+  // add speed to boat
   boat.coords.x += boat.speedX/10;
   boat.coords.y += boat.speedY/10;
 
-  // compute new boat speed
-  //boat.coords.x += cos(radians(boat.angle))*boat.engine_power ;
-  //boat.coords.y += sin(radians(boat.angle))*boat.engine_power ;
-
-   //add boat steering
-  //boat.coords.x += cos(radians(boat.angle))*boat.boatSpeed() * 4;
-  //boat.coords.y += sin(radians(boat.angle))*boat.boatSpeed() * 4;
 
   // add wind
   boat.coords.x += cos(radians(wind.angle))*wind.strength;

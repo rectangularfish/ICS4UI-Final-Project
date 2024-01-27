@@ -1,4 +1,3 @@
-
 // returns a constant based on the type of vessel
 int determineCrouchconstant(String type) {
 
@@ -29,7 +28,7 @@ int findIndex(String target, String[] array) {
 
 
 
-// set the program gui variables to the saved one in the settings text file
+// set the program gui variables to the saved ones in the settings text file
 void setValues() {
 
   String[] dropList = loadStrings("list_421174");

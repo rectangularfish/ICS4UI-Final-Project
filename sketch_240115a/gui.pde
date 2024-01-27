@@ -99,7 +99,6 @@ public void button1_click1(GButton source, GEvent event) { //_CODE_:button1:5989
 
 public void saveButtonClicked(GButton source, GEvent event) { //_CODE_:saveSettingsButton:766507:
 
-
   // create empty array for data
   String[] settings = new String[8];
 
@@ -214,9 +213,9 @@ public void createGUI(){
   label11.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label11.setText("Strength:");
   label11.setOpaque(false);
-  windStrengthSlider = new GSlider(window1, 100, 280, 150, 40, 10.0);
+  windStrengthSlider = new GSlider(window1, 100, 280, 140, 40, 10.0);
   windStrengthSlider.setShowValue(true);
-  windStrengthSlider.setLimits(3, 0, 10);
+  windStrengthSlider.setLimits(3, 0, 20);
   windStrengthSlider.setNumberFormat(G4P.INTEGER, 0);
   windStrengthSlider.setOpaque(false);
   windStrengthSlider.addEventHandler(this, "strengthWindChange");
@@ -224,7 +223,7 @@ public void createGUI(){
   label12.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   label12.setText("Angle:");
   label12.setOpaque(false);
-  windAngleSlider = new GSlider(window1, 100, 330, 150, 40, 10.0);
+  windAngleSlider = new GSlider(window1, 100, 330, 140, 40, 10.0);
   windAngleSlider.setShowValue(true);
   windAngleSlider.setLimits(70, 0, 360);
   windAngleSlider.setNumberFormat(G4P.INTEGER, 0);
