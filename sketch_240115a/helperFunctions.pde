@@ -28,13 +28,25 @@ int findIndex(String target, String[] array) {
 
 
 
-// set the program gui variables to the saved ones in the settings text file
-void setValues() {
+// initialize boat, wind and waves and set the program's gui variables to the saved ones in the settings text file
+void initializeSettings() {
 
   String[] dropList = loadStrings("list_421174");
 
   String [] data = loadStrings("settings.txt");
 
+  // initilize boat
+  boat = new Boat(width/2, height/2, int(data[0]), int(data[1]), data[2] );
+
+  boat.calculateMaxSpeed();
+
+
+  // initilize wind and wave
+  wind = new Force(int(data[3]), int(data[4]), new PVector(150, 125), color(255, 255, 255), "Wind");
+  wave = new Wave(int(data[5]), float(data[6]), int(data[7]), new PVector(150, 50), color(0, 255, 255), "Wave");
+  wind.changeStrength();
+
+  // set gui variables
   maxSpeedLabel.setText(str(boat.maxSpeed) + " km/h");
   boatPowerField.setText(str(int(data[0])));
   boatWeightField.setText(str(int(data[1])));
@@ -43,15 +55,8 @@ void setValues() {
 
   windStrengthSlider.setValue(int(data[4]));
   waveStrengthSlider.setValue(int(data[5]));
-  waveAttackSlider.setValue(int(data[6]));
+  waveAttackSlider.setValue(float(data[6]));
   wavelengthSlider.setValue(int(data[7]));
-}
 
-void boatPhysics() {
-  
-  
-  
-  
-  
-  
+  boat.calculateMaxSpeed();
 }

@@ -3,12 +3,8 @@ class Force {
 
   // fields
   float angle, strength, constantStrength;
-
   PVector offset;
-
   color colour;
-
-
   String type;
 
 
@@ -24,7 +20,7 @@ class Force {
     this.colour = c;
   }
 
-
+  // draws text and arrow
   void drawMe() {
 
 

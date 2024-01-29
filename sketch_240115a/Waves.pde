@@ -13,6 +13,7 @@ class Wave extends Force {
     this.wavelength = wl;
     this.tick = 0;
     this.attack = a;
+    
   }
 
 

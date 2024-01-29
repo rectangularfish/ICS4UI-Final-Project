@@ -1,11 +1,8 @@
 class Boat {
 
   // set class fields
-  PVector coords;
-  PVector old;
-
-  float speedX, speedY, angle, horsePower, weight, SOG, maxSpeed;
-  float throttle;
+  PVector coords, old;
+  float speedX, speedY, angle, horsePower, weight, SOG, maxSpeed, throttle;
   String type;
 
   // constructor
@@ -42,11 +39,12 @@ class Boat {
     this.maxSpeed = float(nf((sqrt(this.horsePower / this.weight) * determineCrouchconstant(this.type) * 1.852), 0, 2));
   }
 
-  // friction ensures that with full throttle we reach at most max speed
+  // friction ensures that with full throttle boat will reach at most max speed
   float getFriction() {
     return ((this.horsePower*0.045)/this.maxSpeed);
   }
 
+  // updates boat position
   void updateBoatPosition() {
 
     // boat old coordinates
@@ -89,23 +87,24 @@ class Boat {
   void drawMe() {
     fill(255, 255, 255);
     translate(this.coords.x, this.coords.y);
+    
+    
+    // draws statistics
     text(nf(throttle*100, 0, 0)+"%", -80, -45);
     text(nf(abs(angle%360), 0, 1)+"°", 30, -45);
     text("Speed: "+nf(this.boatSpeed(), 0, 2)+" / "+this.maxSpeed, 5, 63 );
     text("SOG: "+nf(this.SOG * 10, 0, 2), 5, 93 );
     rotate(radians(this.angle));
-
+     
+     
+    // draw boat
     scale(0.65);
-
     fill(255);
     rect(-30, -14, 80, 30, 10, 100, 100, 10);
-
     fill(175, 180, 195);
     rect(2, -7, 15, 15, 5);
-
     fill(0);
     ellipse(-25, 0.5, 25, 10);
-
     resetMatrix();
   }
 }
