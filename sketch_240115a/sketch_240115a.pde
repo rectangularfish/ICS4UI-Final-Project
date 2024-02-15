@@ -19,7 +19,7 @@ void setup() {
   createGUI();
 
 
-  // initializes boat, wind and waves and set gui varibles from settings data file
+  // initialize boat, wind and waves and set gui varibles from settings data file
   initializeSettings();
 }
 

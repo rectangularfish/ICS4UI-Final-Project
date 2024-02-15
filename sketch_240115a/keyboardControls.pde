@@ -18,7 +18,7 @@ void keyPressed() {
   }
 
   // decrease throttle
-  if (keyCode == DOWN) {
+  if (keyCode == DOWN && boat.throttle > 0) {
     boat.throttle = min(1, boat.throttle-0.02);
   }
 

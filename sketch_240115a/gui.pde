@@ -6,7 +6,7 @@
  * Only add/edit code inside the event handlers i.e. only
  * use lines between the matching comment tags. e.g.
 
- void myBtnEvents(GButton button)   { //_CODE_:button1:12356:
+ void myBtnEvents(GButton button) { //_CODE_:button1:12356:
      // It is safe to enter your event code here  
  } //_CODE_:button1:12356:
  
@@ -110,7 +110,6 @@ public void angleChange(GSlider source, GEvent event) { //_CODE_:windAngleSlider
   
 } //_CODE_:windAngleSlider:273369:
 
-// auto generated cannot delete
 public void button1_click1(GButton source, GEvent event) { //_CODE_:button1:598995:
   println("button1 - GButton >> GEvent." + event + " @ " + millis());
 } //_CODE_:button1:598995:
@@ -274,8 +273,8 @@ public void createGUI(){
   label19 = new GLabel(window1, 330, 340, 160, 20);
   label19.setText("←→: rotate left and right");
   label19.setOpaque(false);
-  label20 = new GLabel(window1, 330, 370, 160, 20);
-  label20.setText("s: shut motor completely");
+  label20 = new GLabel(window1, 330, 370, 190, 20);
+  label20.setText("s: shut off engine ");
   label20.setOpaque(false);
   loadLastSettings = new GButton(window1, 420, 200, 100, 40);
   loadLastSettings.setText("Load Last Settings");
